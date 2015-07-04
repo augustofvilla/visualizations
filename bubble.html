@@ -1,0 +1,194 @@
+<html>
+
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="http://code.highcharts.com/maps/highmaps.js"></script>
+  <script src="http://code.highcharts.com/maps/modules/data.js"></script>
+  <script src="http://code.highcharts.com/mapdata/countries/ar/ar-all.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+</head>
+
+<body>
+
+
+  <div id="container" style="height: 1024px; min-width: 310px; max-width: 600px; margin: 0 auto"></div>
+
+<script>
+
+$(function () {
+
+    var data = ([
+    {
+        "z": 2890151,
+        "code": "DF"
+    },
+    {
+        "z": 15625084,
+        "code": "BA"
+    },
+    {
+        "z": 367828,
+        "code": "CT"
+    },
+    {
+        "z": 1055259,
+        "code": "CC"
+    },
+    {
+        "z": 509108,
+        "code": "CH"
+    },
+    {
+        "z": 3308876,
+        "code": "CB"
+    },
+    {
+        "z": 992595,
+        "code": "CN"
+    },
+    {
+        "z": 1235994,
+        "code": "ER"
+    },
+    {
+        "z": 530162,
+        "code": "FM"
+    },
+    {
+        "z": 673307,
+        "code": "JY"
+    },
+    {
+        "z": 318951,
+        "code": "LP"
+    },
+    {
+        "z": 333642,
+        "code": "LR"
+    },
+    {
+        "z": 1738929,
+        "code": "MZ"
+    },
+    {
+        "z": 1101593,
+        "code": "MN"
+    },
+    {
+        "z": 551266,
+        "code": "NQ"
+    },
+    {
+        "z": 638645,
+        "code": "RN"
+    },
+    {
+        "z": 1214441,
+        "code": "SA"
+    },
+    {
+        "z": 681055,
+        "code": "SJ"
+    },
+    {
+        "z": 432310,
+        "code": "SL"
+    },
+    {
+        "z": 273964,
+        "code": "SC"
+    },
+    {
+        "z": 3194537,
+        "code": "SF"
+    },
+    {
+        "z": 874006,
+        "code": "SE"
+    },
+    {
+        "z": 127205,
+        "code": "TF"
+    },
+    {
+        "z": 1448188,
+        "code": "TM"
+    }
+	]);
+    
+   
+
+        // Make codes uppercase to match the map data
+        $.each(data, function () {
+            this.code = this.code.toUpperCase();
+        });
+
+        // Instanciate the map
+        $('#container').highcharts('Map', {
+
+            chart : {
+                borderWidth : 1
+            },
+
+            title : {
+                text : 'Población total por provincia'
+            },
+
+            legend: {
+                layout: 'horizontal',
+                borderWidth: 0,
+                backgroundColor: 'rgba(255,255,255,0.85)',
+                floating: false,
+                verticalAlign: 'top',
+                y: 25
+            },
+
+            mapNavigation: {
+                enabled: true
+            },
+
+            colorAxis: {
+               min: 1,
+                type: 'linear',
+                minColor: '#EEEEFF',
+                maxColor: '#000022',
+                stops: [
+                    [0, '#EFEFFF'],
+                    [0.67, '#4444FF'],
+                    [1, '#000022']
+                ]
+            },
+
+           
+           
+            series : [{
+                name: 'Countries',
+                mapData: Highcharts.maps['countries/ar/ar-all'],
+                color: '#E0E0E0',
+                enableMouseTracking: false
+            }, {
+                type: 'mapbubble',
+                mapData: Highcharts.maps['countries/ar/ar-all'],
+                name: 'Population 2013',
+                joinBy: ['postal-code', 'code'],
+                data: data,
+                minSize: 4,
+                maxSize: '12%',
+                tooltip: {
+                    pointFormat: '{point.code}: {point.z}'
+                }
+            }]
+            
+            
+        });
+
+});
+
+</script>
+
+</body>
+
+
+
+<html>
